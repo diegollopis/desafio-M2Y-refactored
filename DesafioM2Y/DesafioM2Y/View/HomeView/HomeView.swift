@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-let mockList = ["mock", "mock", "mock", "mock", "mock", "mock", "mock", "mock", "mock", "mock", "mock"]
-
-struct Home: View {
+struct HomeView: View {
     // MARK: View Properties
     var safeArea: EdgeInsets
     var size: CGSize
@@ -68,12 +66,9 @@ struct Home: View {
     
     @ViewBuilder
     func MoviesList() -> some View {
-        VStack(spacing: 60) {
-            ForEach(mockList, id: \.self) { index in
-                Text(index)
-                    .foregroundStyle(.white)
-                    .fontWeight(.semibold)
-                    .font(.callout)
+        VStack {
+            ForEach(mockList, id: \.self) { movie in
+                MovieItem(movie: movie)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -81,6 +76,6 @@ struct Home: View {
 }
 
 #Preview {
-    ContentView()
+    MainView()
 }
 

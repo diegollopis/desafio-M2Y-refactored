@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainView: View {
     var body: some View {
         GeometryReader {
             let safeArea = $0.safeAreaInsets
             let size = $0.size
             
-            Home(safeArea: safeArea, size: size)
+            HomeView(safeArea: safeArea, size: size)
                 .ignoresSafeArea(.container, edges: .top)
         }
         .preferredColorScheme(.dark)
@@ -21,5 +21,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    MainView()
 }
