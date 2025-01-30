@@ -5,85 +5,31 @@
 //  Created by Diego Janjardi Briz Llopis on 29/01/25.
 //
 
-//struct APIMoviesList: Codable {
-//    
-//    let results: [Results]
-//}
-
-struct Movie: Codable, Hashable {
-    
-    let title: String
-    let releaseDate: String
-    let posterPath: String
-    let genreIds: [String]
+struct MoviesList: Codable {
+    let results: [Movie]
 }
 
-let mockList = [
-    Movie(
-        title: "Armor wars",
-        releaseDate: "2018",
-        posterPath: "johnny_2",
-        genreIds: ["Aventura, Ação"]
-    ),
-    Movie(
-        title: "Armor wars",
-        releaseDate: "2018",
-        posterPath: "johnny_2",
-        genreIds: ["Aventura, Ação"]
-    ),
-    Movie(
-        title: "Armor wars",
-        releaseDate: "2018",
-        posterPath: "johnny_2",
-        genreIds: ["Aventura, Ação"]
-    ),
-    Movie(
-        title: "Armor wars",
-        releaseDate: "2018",
-        posterPath: "johnny_2",
-        genreIds: ["Aventura, Ação"]
-    ),
-    Movie(
-        title: "Armor wars",
-        releaseDate: "2018",
-        posterPath: "johnny_2",
-        genreIds: ["Aventura, Ação"]
-    ),
-    Movie(
-        title: "Armor wars",
-        releaseDate: "2018",
-        posterPath: "johnny_2",
-        genreIds: ["Aventura, Ação"]
-    ),
-    Movie(
-        title: "Armor wars",
-        releaseDate: "2018",
-        posterPath: "johnny_2",
-        genreIds: ["Aventura, Ação"]
-    ),
-    Movie(
-        title: "Armor wars",
-        releaseDate: "2018",
-        posterPath: "johnny_2",
-        genreIds: ["Aventura, Ação"]
-    ),
-    Movie(
-        title: "Armor wars",
-        releaseDate: "2018",
-        posterPath: "johnny_2",
-        genreIds: ["Aventura, Ação"]
-    ),
-    Movie(
-        title: "Armor wars",
-        releaseDate: "2018",
-        posterPath: "johnny_2",
-        genreIds: ["Aventura, Ação"]
-    ),
-    Movie(
-        title: "Armor wars",
-        releaseDate: "2018",
-        posterPath: "johnny_2",
-        genreIds: ["Aventura, Ação"]
-    ),
-]
-
+struct Movie: Codable, Hashable {
+    let title: String
+    let releaseDate: String?
+    let posterPath: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case title
+        case releaseDate = "release_date"
+        case posterPath = "poster_path"
+    }
+    
+    var dateFormatted: String {
+        if let releaseDate = releaseDate {
+            let date = releaseDate.prefix(4)
+            return String(date)
+        }
+        return ""
+    }
+    
+    var posterPathFormatted: String {
+        let baseUrl = "https://image.tmdb.org/t/p/original/"
+        return "\(baseUrl)\(posterPath)"
+    }
+}

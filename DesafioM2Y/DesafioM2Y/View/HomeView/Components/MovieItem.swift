@@ -5,6 +5,7 @@
 //  Created by Diego Janjardi Briz Llopis on 29/01/25.
 //
 import SwiftUI
+import Kingfisher
 
 struct MovieItem: View {
     
@@ -17,29 +18,34 @@ struct MovieItem: View {
                 .frame(height: 120)
             
             HStack(spacing: 15) {
-                Image(movie.posterPath)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 75, height: 100)
-                    .clipped()
-                
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(movie.title)
-                        .fontWeight(.bold)
-                        .font(.headline)
-                    HStack {
-                        Text(movie.releaseDate)
-                        Text(movie.genreIds.first ?? "")
-                    }
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                }
-                
+                Poster()
+                MovieInfo()
                 Spacer()
             }
             .preferredColorScheme(.dark)
             .padding(.horizontal, 10)
+        }
+    }
+    
+    @ViewBuilder
+    private func Poster() -> some View {
+        KFImage(URL(string: movie.posterPathFormatted))
+            .resizable()
+            .scaledToFill()
+            .frame(width: 75, height: 100)
+            .clipped()
+    }
+    
+    @ViewBuilder
+    private func MovieInfo() -> some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(movie.title)
+                .fontWeight(.bold)
+                .font(.headline)
             
+            Text(movie.dateFormatted)
+                .font(.subheadline)
+                .fontWeight(.semibold)
         }
     }
 }
@@ -49,8 +55,7 @@ struct MovieItem: View {
         movie: Movie(
             title: "Armor wars",
             releaseDate: "2018",
-            posterPath: "johnny_2",
-            genreIds: ["Aventura, Ação"]
+            posterPath: "johnny_2"
         )
     )
 }

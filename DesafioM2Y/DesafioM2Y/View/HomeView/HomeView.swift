@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct HomeView: View {
-    // MARK: View Properties
+    
     var safeArea: EdgeInsets
     var size: CGSize
+    
+    @ObservedObject var vm = HomeVM()
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -36,7 +38,7 @@ struct HomeView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: size.width, height: size.height + (minY > 0 ? minY : 0))
-                .offset(y: minY > 0 ? 0 : minY / 3)
+                .offset(y: minY > 0 ? 0 : minY / 2)
                 .clipped()
                 .overlay(content: {
                     ZStack(alignment: .bottom) {
@@ -62,12 +64,16 @@ struct HomeView: View {
                 .offset(y: -minY)
         }
         .frame(height: height + safeArea.top)
+        .onAppear {
+            vm.fetchMoviesList()
+        }
+        
     }
     
     @ViewBuilder
     func MoviesList() -> some View {
         VStack {
-            ForEach(mockList, id: \.self) { movie in
+            ForEach(vm.movieList, id: \.self) { movie in
                 MovieItem(movie: movie)
             }
         }
