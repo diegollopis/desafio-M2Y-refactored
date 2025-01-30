@@ -17,7 +17,7 @@ class HomeVM: ObservableObject {
     let movieUrl: String = "https://api.themoviedb.org/3/movie/24428?api_key=e5eb01e1a7cf82d8d5d574e34f2e58ff&language=en-US"
   
     @Published var movieList: [Movie] = []
-    @Published var movieHeader: MovieHeader = MovieHeader(title: "", voteAverage: 0, voteCount: 0, posterPath: "")
+    @Published var movieHeader: MovieHeader = MovieHeader(title: "", popularity: 0.0, voteAverage: 0, voteCount: 0, posterPath: "")
     
     func fetch() {
         fetchMovieHeader()
@@ -30,7 +30,6 @@ class HomeVM: ObservableObject {
                 switch response.result {
                 case .success(let data):
                     self.movieList = data.results
-                    print(data.results)
                 case .failure(let error):
                     print(error)
                 }

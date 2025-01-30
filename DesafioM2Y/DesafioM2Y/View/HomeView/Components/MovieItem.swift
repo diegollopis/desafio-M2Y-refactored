@@ -23,7 +23,6 @@ struct MovieItem: View {
                 Spacer()
             }
             .preferredColorScheme(.dark)
-            .padding(.horizontal, 10)
         }
     }
     
