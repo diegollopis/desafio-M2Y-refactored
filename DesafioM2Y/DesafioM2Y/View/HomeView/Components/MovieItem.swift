@@ -55,7 +55,7 @@ struct MovieItem: View {
         movie: Movie(
             title: "Armor wars",
             releaseDate: "2018",
-            posterPath: "johnny_2"
+            posterPath: "https://image.tmdb.org/t/p/original/5X8kiQQXZKEcUimJGSykwc3dAqA.jpg"
         )
     )
 }

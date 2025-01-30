@@ -5,11 +5,11 @@
 //  Created by Diego Janjardi Briz Llopis on 29/01/25.
 //
 
-struct MoviesList: Codable {
+struct MoviesList: Decodable {
     let results: [Movie]
 }
 
-struct Movie: Codable, Hashable {
+struct Movie: Decodable, Hashable {
     let title: String
     let releaseDate: String?
     let posterPath: String

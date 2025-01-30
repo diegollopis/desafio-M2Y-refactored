@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct HomeView: View {
     
@@ -34,7 +35,7 @@ struct HomeView: View {
             let minY = geometry.frame(in: .named("SCROLL")).minY
             let progress = minY / (height * (minY > 0 ? 0.5 : 0.8))
             
-            Image("johnny_2")
+            KFImage(URL(string: vm.movieHeader.posterPathFormatted))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: size.width, height: size.height + (minY > 0 ? minY : 0))
@@ -65,9 +66,8 @@ struct HomeView: View {
         }
         .frame(height: height + safeArea.top)
         .onAppear {
-            vm.fetchMoviesList()
+            vm.fetch()
         }
-        
     }
     
     @ViewBuilder
