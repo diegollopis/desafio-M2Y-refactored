@@ -1,11 +1,26 @@
 //
-//  MovieItem.swift
+//  ListMovies.swift
 //  DesafioM2Y
 //
 //  Created by Diego Janjardi Briz Llopis on 29/01/25.
 //
 import SwiftUI
 import Kingfisher
+
+struct ListMovies: View {
+    
+    @ObservedObject var vm: HomeVM
+    
+    var body: some View {
+        VStack {
+            ForEach(vm.movieList, id: \.self) { movie in
+                MovieItem(movie: movie)
+            }
+        }
+        .padding(.horizontal, 15)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
 
 struct MovieItem: View {
     
