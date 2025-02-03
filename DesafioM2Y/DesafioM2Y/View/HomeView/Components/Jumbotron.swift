@@ -9,6 +9,8 @@ import Kingfisher
 
 struct Jumbotron: View {
     
+    @State private var isClicked = false
+    
     @ObservedObject var vm: HomeVM
     var safeArea: EdgeInsets
     var size: CGSize
@@ -78,27 +80,32 @@ struct Jumbotron: View {
                 Spacer()
                 
                 Button {
-                    print("botão clicado!")
+                    isClicked.toggle()
                 } label: {
-                    Image(systemName: "heart")
+                    Image(systemName: isClicked ? "heart.fill" : "heart")
                         .foregroundStyle(Color.white)
-                        .scaleEffect(1.2)
+                        .scaleEffect(1.4)
                 }
             }
             
-            HStack() {
-                Image(systemName: "heart.fill")
-                Text(vm.movieHeader.likesFormatted)
-                Spacer()
-                Image(systemName: "eye")
-                Text(vm.movieHeader.viewsFormatted)
-                Spacer()
+            HStack {
+                Icon("heart.fill", vm.movieHeader.likesFormatted)
+                Icon("eye", vm.movieHeader.viewsFormatted)
             }
-            .font(.subheadline)
-            .fontWeight(.medium)
+            
         }
         .padding(.horizontal, 15)
         .frame(height: 120)
         .preferredColorScheme(.dark)
+    }
+    
+    fileprivate func Icon(_ icon: String, _ text: String) -> some View {
+        return HStack() {
+            Image(systemName: icon)
+            Text(text)
+            Spacer()
+        }
+        .font(.subheadline)
+        .fontWeight(.medium)
     }
 }
