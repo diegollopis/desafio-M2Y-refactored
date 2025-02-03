@@ -25,10 +25,20 @@ struct MovieHeader: Decodable {
     }
     
     var likesFormatted: String {
-        "\(voteCount) Curtidas"
+        if voteCount > 1000 {
+            let result = Double(voteCount) / 1000
+            return String(format: "%.1f", result) + " K Curtidas"
+        } else {
+            return "\(voteCount) Curtidas"
+        }
     }
     
     var viewsFormatted: String {
-        "\(popularity) Visualizações"
+        if popularity > 100 {
+            let result = Double(popularity)
+            return String(format: "%.1f", result) + "K Visualizações"
+        } else {
+            return "\(popularity) Visualizações"
+        }
     }
 }
