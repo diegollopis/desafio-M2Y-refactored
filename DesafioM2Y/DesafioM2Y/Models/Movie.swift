@@ -5,17 +5,22 @@
 //  Created by Diego Janjardi Briz Llopis on 29/01/25.
 //
 
+import Foundation
+
 struct MoviesList: Decodable {
     let results: [Movie]
 }
 
-struct Movie: Decodable, Hashable {
+struct Movie: Decodable, Identifiable, Hashable {
+    let id = UUID()
     let title: String
+    let overview: String
     let releaseDate: String?
     let posterPath: String
     
     private enum CodingKeys: String, CodingKey {
         case title
+        case overview
         case releaseDate = "release_date"
         case posterPath = "poster_path"
     }

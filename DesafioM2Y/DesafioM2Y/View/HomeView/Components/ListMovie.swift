@@ -17,8 +17,6 @@ struct ListMovies: View {
                 MovieItem(movie: movie)
             }
         }
-        .padding(.horizontal, 15)
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
@@ -61,6 +59,8 @@ struct MovieItem: View {
                 .font(.subheadline)
                 .fontWeight(.semibold)
         }
+        .foregroundStyle(Color.white)
+        .lineLimit(1)
     }
 }
 
@@ -68,6 +68,7 @@ struct MovieItem: View {
     MovieItem(
         movie: Movie(
             title: "Armor wars",
+            overview: "",
             releaseDate: "2018",
             posterPath: "https://image.tmdb.org/t/p/original/5X8kiQQXZKEcUimJGSykwc3dAqA.jpg"
         )

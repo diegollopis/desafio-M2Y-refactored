@@ -15,14 +15,23 @@ struct HomeView: View {
     @ObservedObject var vm = HomeVM()
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack {
-                Jumbotron(vm: vm, safeArea: safeArea, size: size)
-                ListMovies(vm: vm)
+        NavigationStack {
+            ScrollView(showsIndicators: false) {
+                VStack {
+                    Jumbotron(vm: vm, safeArea: safeArea, size: size)
+                    ForEach(vm.movieList, id: \.self) { movie in
+                        NavigationLink(value: movie) {
+                            MovieItem(movie: movie)
+                        }
+                    }
+                }
+                .navigationDestination(for: Movie.self) { movie in
+                    Overview(movie: movie, size: CGFloat(size.height))
+                }
             }
+            .coordinateSpace(name: "SCROLL")
+            .onAppear { vm.fetch() }
         }
-        .coordinateSpace(name: "SCROLL")
-        .onAppear { vm.fetch() }
     }
 }
 

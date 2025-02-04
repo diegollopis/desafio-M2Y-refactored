@@ -30,6 +30,7 @@ class HomeVM: ObservableObject {
         service.getHeader()
             .subscribe(onSuccess: { response in
                 self.movieHeader = response
+                print(response)
             }, onFailure: { error in
                 print(error)
             })
@@ -40,6 +41,7 @@ class HomeVM: ObservableObject {
         service.getMoviesList()
             .subscribe(onSuccess: { response in
                 self.movieList = response.results
+                print(response)
             }, onFailure: { error in
                 print(error)
             })
