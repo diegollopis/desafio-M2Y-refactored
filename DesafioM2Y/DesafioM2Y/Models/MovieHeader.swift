@@ -36,9 +36,9 @@ struct MovieHeader: Decodable {
     var viewsFormatted: String {
         if popularity > 100 {
             let result = Double(popularity)
-            return String(format: "%.1f", result) + "K Visualizações"
+            return String(format: "%.1f", result) + "K Views"
         } else {
-            return "\(popularity) Visualizações"
+            return "\(popularity) Views"
         }
     }
 }
