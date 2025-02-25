@@ -32,6 +32,7 @@ struct HomeView: View {
             .coordinateSpace(name: "SCROLL")
             .onAppear { vm.fetch() }
         }
+        .offset(y: -60)
     }
 }
 
