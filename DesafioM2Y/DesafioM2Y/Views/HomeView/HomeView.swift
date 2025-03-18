@@ -17,7 +17,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
-                VStack {
+                LazyVStack {
                     Jumbotron(vm: vm, safeArea: safeArea, size: size)
                     ForEach(vm.movieList, id: \.self) { movie in
                         NavigationLink(value: movie) {
@@ -32,7 +32,6 @@ struct HomeView: View {
             .coordinateSpace(name: "SCROLL")
             .onAppear { vm.fetch() }
         }
-        .offset(y: -60)
     }
 }
 

@@ -34,7 +34,8 @@ struct Overview: View {
 
 #Preview {
     Overview(movie: Movie(
-        title: "Os vingadores cabuloso", overview: "",
+        title: "Os vingadores cabuloso",
+        overview: "",
         releaseDate: "",
         posterPath: ""),
         size: 400
